@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chowdam Revathi Lakshmi — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0d17; --bg-soft:#11141f; --card:#131627; --card-border:#232842;
+  --text:#eef0fb; --text-dim:#9aa0c0; --text-faint:#6c7296;
+  --blue:#5b7cfa; --purple:#9b5cf6; --pink:#ef5fae;
+  --grad: linear-gradient(90deg,var(--blue),var(--purple),var(--pink));
+  --grad-soft: linear-gradient(135deg,rgba(91,124,250,.18),rgba(239,95,174,.12));
+  box-sizing:border-box;
+  padding-top: env(safe-area-inset-top,0px);
+  padding-bottom: env(safe-area-inset-bottom,0px);
+}
+:root[data-theme="light"]{
+  --bg:#f5f6fb; --bg-soft:#ffffff; --card:#ffffff; --card-border:#e5e7f3;
+  --text:#171a2b; --text-dim:#565c7c; --text-faint:#8a8fb0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth; scroll-padding-top: calc(78px + env(safe-area-inset-top,0px));}
+body{
+  background:
+    radial-gradient(circle at 12% 18%, rgba(155,92,246,.12), transparent 30%),
+    radial-gradient(circle at 88% 72%, rgba(91,124,250,.10), transparent 32%),
+    radial-gradient(circle at 55% 45%, rgba(239,95,174,.055), transparent 26%),
+    var(--bg);
+  background-attachment:fixed;
+  color:var(--text);
+  font-family:'Poppins',sans-serif;
+  min-height:100%;
+  overflow-x:hidden;
+  transition:background .3s,color .3s;
+}
+.script{font-family:'Dancing Script',cursive;}
+a{color:inherit; text-decoration:none;}
+.wrap{max-width:1200px; margin:0 auto; padding:0 28px;}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  opacity:.55;
+  background-image:
+    linear-gradient(rgba(155,92,246,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91,124,250,.035) 1px, transparent 1px);
+  background-size:42px 42px;
+  mask-image:linear-gradient(to bottom, black, transparent 90%);
+}
+
+
+/* NAV */
+header{
+  position:sticky; top:0; z-index:50;
+  padding-top: env(safe-area-inset-top,0px);
+  background:color-mix(in srgb, var(--bg) 72%, transparent); backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--card-border);
+}
+:root[data-theme="light"] header{background:color-mix(in srgb, var(--bg) 76%, transparent);}
+nav{display:flex; align-items:center; justify-content:space-between; padding:16px 28px; max-width:1200px; margin:0 auto;}
+.logo{font-weight:700; font-size:1.3rem;}
+.logo::after{content:'.'; color:var(--pink);}
+.nav-links{display:flex; gap:30px; list-style:none;}
+.nav-links a{font-size:.92rem; color:var(--text-dim); font-weight:500; transition:color .2s; position:relative; padding-bottom:4px;}
+.nav-links a:hover, .nav-links a.active{color:var(--text);}
+.nav-links a.active::after{content:''; position:absolute; left:0; right:0; bottom:-2px; height:2px; background:var(--grad); border-radius:2px;}
+.nav-actions{display:flex; align-items:center; gap:10px;}
+.icon-btn{
+  width:38px; height:38px; border-radius:50%; border:1px solid var(--card-border);
+  background:var(--card); display:flex; align-items:center; justify-content:center;
+  cursor:pointer; color:var(--text); font-size:1rem; transition:transform .15s, border-color .2s;
+}
+.icon-btn:hover{border-color:var(--purple); transform:translateY(-1px);}
+.menu-toggle{display:none;}
+.mobile-panel{display:none;}
+
+/* HERO */
+.hero{position:relative; padding:90px 0 60px; overflow:hidden;}
+.hero-glow{position:absolute; width:520px; height:520px; border-radius:50%; filter:blur(90px); opacity:.35; z-index:0;}
+.hero-glow.g1{background:var(--purple); top:-160px; left:-160px;}
+.hero-glow.g2{background:var(--blue); bottom:-200px; right:-160px;}
+.hero-inner{position:relative; z-index:1; display:grid; grid-template-columns:1.15fr .85fr; gap:20px; align-items:center;}
+.eyebrow{display:inline-flex; align-items:center; gap:8px; color:var(--purple); font-weight:600; font-size:.95rem; margin-bottom:14px;}
+h1.name{font-size:clamp(2.1rem,5vw,3.4rem); font-weight:800; line-height:1.12; margin-bottom:14px;}
+h1.name .grad{background:var(--grad); background-size:300% auto; -webkit-background-clip:text; background-clip:text; color:transparent; animation:hue-shift 3.5s ease-in-out infinite;}
+@keyframes hue-shift{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+@media (prefers-reduced-motion: reduce){
+  h1.name .grad{animation:none;}
+}
+.role{font-size:1.05rem; color:var(--text-dim); font-weight:500; margin-bottom:16px;}
+.role .sep{color:var(--card-border); margin:0 4px;}
+.bio{color:var(--text-faint); font-size:.98rem; line-height:1.7; max-width:520px; margin-bottom:28px;}
+.cta-row{display:flex; flex-wrap:wrap; gap:14px;}
+.btn{
+  display:inline-flex; align-items:center; gap:8px; padding:13px 22px; border-radius:30px;
+  font-weight:600; font-size:.94rem; cursor:pointer; border:1px solid transparent; transition:transform .15s, opacity .2s;
+}
+.btn:hover{transform:translateY(-2px);}
+.btn-grad{background:var(--grad); color:#fff;}
+.btn-outline{border-color:var(--card-border); background:var(--card); color:var(--text);}
+.hero-art{position:relative; height:340px; display:flex; align-items:center; justify-content:center;}
+.hero-art svg{width:100%; max-width:340px; height:auto;}
+.dream-text{font-family:'Dancing Script',cursive; font-weight:700; font-size:2.1rem; background:var(--grad); background-size:300% auto; -webkit-background-clip:text; background-clip:text; color:transparent; text-align:center; line-height:1.15; transform:rotate(-4deg); animation:hue-shift 3.5s ease-in-out infinite;}
+.scroll-hint{display:flex; flex-direction:column; align-items:center; gap:8px; margin:40px auto 0; color:var(--text-faint); font-size:.85rem; width:fit-content;}
+.scroll-circle{width:34px; height:34px; border-radius:50%; border:1px solid var(--card-border); display:flex; align-items:center; justify-content:center; animation:bounce 2.2s infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0);} 50%{transform:translateY(6px);}}
+
+/* SECTIONS */
+section{padding:70px 0;}
+.section-tag{color:var(--purple); font-weight:700; font-size:.85rem; letter-spacing:.02em; margin-bottom:6px;}
+.section-title{font-size:clamp(1.6rem,3.4vw,2.1rem); font-weight:800; margin-bottom:34px;}
+.section-title .spark{color:var(--pink);}
+
+/* ABOUT */
+.about-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:34px; align-items:start;}
+.about-grid p{color:var(--text-dim); line-height:1.8; margin-bottom:22px;}
+.about-grid b{color:var(--text);}
+.card{background:var(--card); border:1px solid var(--card-border); border-radius:18px;}
+.info-card{padding:28px; display:flex; flex-direction:column; gap:22px;}
+.info-row{display:flex; gap:16px; align-items:flex-start;}
+.info-icon{width:40px; height:40px; border-radius:12px; background:var(--grad-soft); display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--purple); font-size:1.1rem;}
+.info-row h4{font-size:.8rem; color:var(--text-faint); font-weight:600; margin-bottom:3px; text-transform:uppercase; letter-spacing:.03em;}
+.info-row p{color:var(--text); font-size:.95rem; margin:0;}
+
+/* SKILLS */
+.skills-note{color:var(--text-faint); font-size:.85rem; text-align:right; margin-top:-46px; margin-bottom:26px;}
+.skills-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:18px;}
+.skill-card{padding:24px 20px; text-align:left; transition:transform .18s, border-color .2s;}
+.skill-card:hover{transform:translateY(-4px); border-color:var(--purple);}
+.skill-icon{width:46px; height:46px; border-radius:12px; background:var(--grad-soft); display:flex; align-items:center; justify-content:center; font-size:1.25rem; margin-bottom:16px;}
+.skill-card h4{font-size:1rem; font-weight:600; margin-bottom:14px;}
+.bar-track{height:6px; border-radius:6px; background:var(--card-border); overflow:hidden; margin-bottom:8px;}
+.bar-fill{height:100%; border-radius:6px; background:var(--grad);}
+.skill-pct{font-size:.78rem; color:var(--text-faint); text-align:right;}
+
+/* PROJECTS / CERT / EDU */
+.row-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:26px; flex-wrap:wrap; gap:16px;}
+.filters{display:flex; gap:10px;}
+.chip{padding:9px 18px; border-radius:20px; font-size:.85rem; font-weight:600; border:1px solid var(--card-border); background:var(--card); cursor:pointer; color:var(--text-dim);}
+.chip.active{background:var(--grad); color:#fff; border-color:transparent;}
+.list-card{padding:26px; display:flex; gap:20px; align-items:center; margin-bottom:18px; flex-wrap:wrap;}
+.list-icon{width:54px; height:54px; border-radius:14px; background:var(--grad-soft); display:flex; align-items:center; justify-content:center; font-size:1.4rem; color:var(--purple); flex-shrink:0;}
+.list-body{flex:1; min-width:200px;}
+.list-body h3{font-size:1.05rem; font-weight:700; margin-bottom:6px;}
+.list-body p{color:var(--text-faint); font-size:.9rem; line-height:1.6; margin-bottom:12px;}
+.tags{display:flex; gap:8px; flex-wrap:wrap;}
+.tag{padding:5px 12px; border-radius:20px; background:var(--grad-soft); color:var(--purple); font-size:.75rem; font-weight:600;}
+.list-cta{padding:11px 20px; border-radius:24px; background:var(--card); border:1px solid var(--card-border); font-weight:600; font-size:.85rem; white-space:nowrap; cursor:pointer;}
+
+.edu-card{padding:26px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+.edu-left{display:flex; gap:18px; align-items:center;}
+.edu-left h3{font-size:1.05rem; margin-bottom:4px;}
+.edu-left p{color:var(--text-faint); font-size:.88rem;}
+.edu-right{display:flex; align-items:center; gap:10px; color:var(--text-dim); font-size:.9rem; font-weight:600;}
+
+/* CONTACT */
+.contact-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px;}
+.contact-row p{color:var(--text-faint); max-width:420px; font-size:.92rem;}
+.contact-actions{display:flex; gap:12px; flex-wrap:wrap;}
+
+footer{border-top:1px solid var(--card-border); padding:26px 0; text-align:center; color:var(--text-faint); font-size:.82rem;}
+
+.reveal{opacity:0; transform:translateY(26px); transition:opacity .42s cubic-bezier(.16,.8,.3,1), transform .42s cubic-bezier(.16,.8,.3,1);}
+.reveal.in{opacity:1; transform:translateY(0);}
+.reveal-group .reveal:nth-child(1){transition-delay:0s;}
+.reveal-group .reveal:nth-child(2){transition-delay:.05s;}
+.reveal-group .reveal:nth-child(3){transition-delay:.10s;}
+.reveal-group .reveal:nth-child(4){transition-delay:.15s;}
+.reveal-group .reveal:nth-child(5){transition-delay:.20s;}
+@media (prefers-reduced-motion: reduce){
+  .reveal{transition:none; opacity:1; transform:none;}
+}
+
+@media(max-width:880px){
+  .nav-links{position:fixed; top:calc(66px + env(safe-area-inset-top,0px)); left:0; right:0; background:var(--bg-soft); border-bottom:1px solid var(--card-border);
+    flex-direction:column; padding:18px 28px; gap:16px; transform:translateY(-130%); transition:transform .18s; z-index:40;}
+  .nav-links.open{transform:translateY(0);}
+  .menu-toggle{display:flex;}
+  .hero-inner{grid-template-columns:1fr; text-align:center;}
+  .bio{margin-left:auto; margin-right:auto;}
+  .cta-row{justify-content:center;}
+  .hero-art{height:220px; order:-1;}
+  .about-grid{grid-template-columns:1fr;}
+  .skills-grid{grid-template-columns:repeat(2,1fr);}
+  .skills-note{text-align:left; margin-top:0;}
+  .edu-card{flex-direction:column; align-items:flex-start;}
+}
+@media(max-width:520px){
+  .skills-grid{grid-template-columns:1fr 1fr;}
+  .wrap{padding:0 18px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">Revathi</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certificates">Certificates</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">🌙</button>
+      <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="hero-glow g1"></div>
+    <div class="hero-glow g2"></div>
+    <div class="wrap hero-inner">
+      <div>
+        <div class="eyebrow">✦ Hello, I'm</div>
+        <h1 class="name">Chowdam <span class="grad">Revathi</span> <span class="grad">Lakshmi</span></h1>
+        <p class="role">Aspiring Graphic Designer<span class="sep">|</span>PHP<span class="sep">|</span>MySQL<span class="sep">|</span>DBMS<span class="sep">|</span>Marketing</p>
+        <p class="bio">A Computer Science &amp; Engineering student at Sri Venkateswara College of Engineering, Tirupati (3rd Year), passionate about technology, creativity and continuous learning.</p>
+        <div class="cta-row">
+          <a class="btn btn-grad" href="resume.pdf">⬇ View Resume</a>
+          <a class="btn btn-outline" href="https://www.linkedin.com/in/chowdam-revathi-lakshmi-31007236b" target="_blank" rel="noopener">in LinkedIn ↗</a>
+          <button class="btn btn-outline" id="copyLinkBtn">⧉ Copy Link</button>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div>
+          <div class="dream-text">Dream<br>Create<br>Achieve ♡</div>
+          <svg viewBox="0 0 200 260" style="max-width:180px;margin:10px auto 0;display:block;">
+            <path d="M100 250 C100 180 100 120 100 20" stroke="var(--purple)" stroke-width="1.4" fill="none" opacity=".55"/>
+            <path d="M100 90 C70 70 55 90 60 110 C85 110 100 100 100 90" fill="none" stroke="var(--blue)" stroke-width="1.4" opacity=".55"/>
+            <path d="M100 130 C130 110 145 130 140 150 C115 150 100 140 100 130" fill="none" stroke="var(--pink)" stroke-width="1.4" opacity=".55"/>
+            <path d="M100 170 C70 155 58 175 63 195 C88 195 100 185 100 170" fill="none" stroke="var(--purple)" stroke-width="1.4" opacity=".55"/>
+            <path d="M85 20 C85 8 95 2 100 12 C105 2 115 8 115 20 C115 30 100 38 100 38 C100 38 85 30 85 20Z" fill="none" stroke="var(--pink)" stroke-width="1.4" opacity=".6"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <a href="#about" class="scroll-hint"><div class="scroll-circle">↓</div>Scroll to explore</a>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-tag">01 — ABOUT ME</div>
+      <h2 class="section-title">More about me <span class="spark">✦</span></h2>
+      <div class="about-grid reveal-group">
+        <div class="reveal">
+          <p>I'm <b>Revathi Lakshmi</b>, a 3rd year CSE (AI &amp; ML) student at Sri Venkateswara College of Engineering, Tirupati. I'm passionate about creating meaningful designs, exploring <b>web technologies</b>, and learning new skills. I aim to build a career where I can combine creativity and technology to make a positive impact.</p>
+          <a class="btn btn-grad" href="#projects">Read More →</a>
+        </div>
+        <div class="card info-card reveal">
+          <div class="info-row"><div class="info-icon">👤</div><div><h4>Name</h4><p>Chowdam Revathi Lakshmi</p></div></div>
+          <div class="info-row"><div class="info-icon">🏛️</div><div><h4>College</h4><p>Sri Venkateswara College of Engineering, Tirupati</p></div></div>
+          <div class="info-row"><div class="info-icon">🎓</div><div><h4>Course</h4><p>CSE (Artificial Intelligence &amp; Machine Learning)</p></div></div>
+          <div class="info-row"><div class="info-icon">📅</div><div><h4>Year</h4><p>3rd Year</p></div></div>
+          <div class="info-row"><div class="info-icon">♡</div><div><h4>Interests</h4><p>Graphic Design, Web Development, Marketing, Technology</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="row-head">
+        <div>
+          <div class="section-tag">02 — SKILLS</div>
+          <h2 class="section-title" style="margin-bottom:0;">My Skills <span class="spark">✦</span></h2>
+        </div>
+        <div class="skills-note">Hover on a skill to see more details ✦</div>
+      </div>
+      <div class="skills-grid reveal-group">
+        <div class="card skill-card reveal"><div class="skill-icon">&lt;/&gt;</div><h4>PHP</h4><div class="bar-track"><div class="bar-fill" style="width:70%"></div></div><div class="skill-pct">70%</div></div>
+        <div class="card skill-card reveal"><div class="skill-icon">🗄️</div><h4>MySQL</h4><div class="bar-track"><div class="bar-fill" style="width:65%"></div></div><div class="skill-pct">65%</div></div>
+        <div class="card skill-card reveal"><div class="skill-icon">📊</div><h4>DBMS</h4><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div><div class="skill-pct">60%</div></div>
+        <div class="card skill-card reveal"><div class="skill-icon">🖊️</div><h4>Graphic Design</h4><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><div class="skill-pct">75%</div></div>
+        <div class="card skill-card reveal"><div class="skill-icon">📣</div><h4>Marketing</h4><div class="bar-track"><div class="bar-fill" style="width:70%"></div></div><div class="skill-pct">70%</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="row-head">
+        <div>
+          <div class="section-tag">03 — PROJECTS</div>
+          <h2 class="section-title" style="margin-bottom:0;">My Projects <span class="spark">✦</span></h2>
+        </div>
+        <div class="filters">
+          <div class="chip active">All</div>
+          <div class="chip">Software</div>
+          <div class="chip">Database</div>
+        </div>
+      </div>
+      <div class="card list-card reveal">
+        <div class="list-icon">&lt;/&gt;</div>
+        <div class="list-body">
+          <h3>Exam Hall Management System</h3>
+          <p>A software application designed to automate the process of examination hall allotment and make exam management more organized.</p>
+          <div class="tags"><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">DBMS</span></div>
+        </div>
+        <div class="list-cta">View Project →</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certificates">
+    <div class="wrap">
+      <div class="row-head">
+        <div>
+          <div class="section-tag">04 — CERTIFICATES</div>
+          <h2 class="section-title" style="margin-bottom:0;">My Certificates <span class="spark">✦</span></h2>
+        </div>
+        <div style="color:var(--text-faint); font-size:.85rem;">Click to view certificate ↗</div>
+      </div>
+      <div class="card list-card reveal">
+        <div class="list-icon">📄</div>
+        <div class="list-body">
+          <h3>Digital Marketing Assessment – MTF Institute</h3>
+          <p>Successfully completed the Digital Marketing Assessment.</p>
+          <div class="tags"><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">DBMS</span></div>
+        </div>
+        <div class="list-cta">View Certificate →</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap">
+      <div class="section-tag">05 — EDUCATION</div>
+      <h2 class="section-title">My Education <span class="spark">✦</span></h2>
+      <div class="card edu-card reveal">
+        <div class="edu-left">
+          <div class="list-icon">🎓</div>
+          <div><h3>Sri Venkateswara College of Engineering</h3><p>Tirupati | CSE (AI &amp; ML)</p></div>
+        </div>
+        <div class="edu-right">📅 3rd Year</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-tag">06 — CONTACT</div>
+      <h2 class="section-title">Let's Connect <span class="spark">✦</span></h2>
+      <div class="contact-row reveal">
+        <p>Feel free to reach out for collaborations, opportunities or just to say hi!</p>
+        <div class="contact-actions">
+          <a class="btn btn-outline" href="https://www.linkedin.com/in/chowdam-revathi-lakshmi-31007236b" target="_blank" rel="noopener">in LinkedIn</a>
+          <a class="btn btn-outline" href="mailto:">✉ Email</a>
+          <a class="btn btn-grad" href="#home">↑ Back to Top</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© 2025 Revathi Lakshmi. All rights reserved. &nbsp;|&nbsp; Keep creating ✦ ♡</footer>
+
+<script>
+const themeBtn = document.getElementById('themeToggle');
+themeBtn.addEventListener('click', ()=>{
+  const root = document.documentElement;
+  const isLight = root.getAttribute('data-theme') === 'light';
+  root.setAttribute('data-theme', isLight ? 'dark' : 'light');
+  themeBtn.textContent = isLight ? '🌙' : '☀️';
+});
+
+const menuBtn = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+menuBtn.addEventListener('click', ()=> navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{
+  navLinks.classList.remove('open');
+  navLinks.querySelectorAll('a').forEach(x=>x.classList.remove('active'));
+  a.classList.add('active');
+}));
+
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+      io.unobserve(entry.target);
+    }
+  });
+}, {threshold:0.15, rootMargin:'0px 0px -8% 0px'});
+revealEls.forEach(el=> io.observe(el));
+
+document.getElementById('copyLinkBtn').addEventListener('click', async ()=>{
+  try{
+    await navigator.clipboard.writeText(window.location.href);
+    const btn = document.getElementById('copyLinkBtn');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(()=> btn.innerHTML = orig, 1500);
+  }catch(e){}
+});
+</script>
+</body>
+</html>
